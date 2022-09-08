@@ -1,0 +1,41 @@
+{
+    "name": "queents/ui-module",
+    "description": "Admin One UI Build as a theme for VILT Stack",
+    "type": "laravel-module",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "VILT",
+        "base",
+        "resource",
+        "page",
+        "UI",
+        "Admin One",
+        "admin panel",
+        "admin one",
+        "vuejs",
+        "ineriajs",
+        "tailwind.css"
+    ],
+    "homepage": "https://www.queentechsolutions.net",
+    "authors": [
+        {
+            "name": "Fady Mondy",
+            "email": "info@3x1.io",
+            "role": "Senior Fullstack Developer"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\UI\\": ""
+        }
+    }
+}
