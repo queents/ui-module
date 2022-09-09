@@ -405,7 +405,7 @@ watch(
 </script>
 
 <template>
-    <div>
+    <div class="text-gray-800">
         <!-- Images Light Box -->
         <vue-easy-lightbox
             ref="lightbox"
@@ -528,7 +528,7 @@ watch(
         </div>
 
         <!-- Table -->
-        <div class="px-6 pt-6 mx-auto">
+        <div class="px-6  mx-auto">
             <div
                 class="bg-white dark:bg-gray-800 dark:border-gray-600 rounded-lg border"
             >
@@ -575,8 +575,8 @@ watch(
                         </template>
                     </List>
                 </div>
-                <div class="p-2 border-t">
-                    <Pagination :collection="props.collection"/>
+                <div class="p-2" :class="{'border-t':props.collection.data.length}">
+                    <Pagination class="mt-3 px-2" :collection="props.collection"/>
                 </div>
             </div>
         </div>

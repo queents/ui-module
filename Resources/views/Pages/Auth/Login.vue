@@ -88,13 +88,6 @@ const submit = () => {
                         required
                     />
                 </FormField>
-
-                <FormCheckRadioGroup
-                    v-model="form.remember"
-                    name="remember"
-                    :options="{ remember: 'Remember' }"
-                />
-
                 <BaseDivider />
 
                 <BaseLevel>

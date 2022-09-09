@@ -3,6 +3,7 @@ import { mdiLogout, mdiClose } from "@mdi/js";
 import { computed } from "vue";
 import { useLayoutStore } from "@@/Stores/layout.js";
 import { useStyleStore } from "@@/Stores/style.js";
+import { usePage, Link } from "@inertiajs/inertia-vue3";
 import AsideMenuList from "@@/Themes/AdminOne/AsideMenuList.vue";
 import AsideMenuItem from "@@/Themes/AdminOne/AsideMenuItem.vue";
 import BaseIcon from "@@/Themes/AdminOne/BaseIcon.vue";
@@ -35,11 +36,11 @@ const menuClick = (event, item) => {
 <template>
     <aside
         id="aside"
-        class="lg:py-2 lg:pl-2 w-60 fixed flex z-40 top-0 h-screen transition-position overflow-hidden"
+        class="w-60 fixed flex z-40 top-0 h-screen transition-position overflow-hidden"
     >
         <div
             :class="styleStore.asideStyle"
-            class="lg:rounded-2xl flex-1 flex flex-col overflow-hidden dark:bg-slate-900"
+            class="flex-1 flex flex-col overflow-hidden dark:bg-slate-900"
         >
             <div
                 :class="styleStore.asideBrandStyle"
@@ -48,7 +49,7 @@ const menuClick = (event, item) => {
                 <div
                     class="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0"
                 >
-                    <b class="font-black">One</b>
+                    <b class="font-black">{{ usePage().props.value.data.appName }}</b>
                 </div>
                 <button
                     class="hidden lg:inline-block xl:hidden p-3"

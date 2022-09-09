@@ -1,5 +1,5 @@
 <script setup>
-import { mdiForwardburger, mdiBackburger, mdiMenu } from '@mdi/js';
+import {mdiForwardburger, mdiBackburger, mdiMenu} from '@mdi/js';
 import {ref, computed, watch, onMounted, useAttrs} from 'vue';
 import BaseIcon from '@@/Themes/AdminOne/BaseIcon.vue';
 import NavBar from '@@/Themes/AdminOne/NavBar.vue';
@@ -7,9 +7,9 @@ import NavBarItemPlain from '@@/Themes/AdminOne/NavBarItemPlain.vue';
 import AsideMenu from '@@/Themes/AdminOne/AsideMenu.vue';
 import FooterBar from '@@/Themes/AdminOne/FooterBar.vue';
 import {Inertia} from "@inertiajs/inertia";
-import { useLayoutStore } from '@@/Stores/layout.js';
-import { useStyleStore } from '@@/Stores/style.js';
-import { useResourceStore } from '@@/Stores/resourceStore';
+import {useLayoutStore} from '@@/Stores/layout.js';
+import {useStyleStore} from '@@/Stores/style.js';
+import {useResourceStore} from '@@/Stores/resourceStore';
 
 import {storeToRefs} from "pinia/dist/pinia";
 
@@ -74,7 +74,7 @@ const menuClick = (event, item) => {
     if (item.isChangeLanguage) {
         Inertia.post(
             route("translations.switch"),
-            { language: JSON.parse(localStorage.getItem("lang")) },
+            {language: JSON.parse(localStorage.getItem("lang"))},
             {
                 preserveScroll: true,
                 forceFormData: true,
@@ -142,9 +142,9 @@ onMounted(() => {
         <div
             :class="[
         layoutAsidePadding,
-        { 'ltr:ml-60 ltr:lg:ml-0 rtl:mr-60 rtl:lg:mr-0': layoutStore.isAsideMobileExpanded },
+        { 'ltr:ml-60 ltr:lg:ml-0 rtl:mr-60 rtl:lg:mr-0 ': layoutStore.isAsideMobileExpanded },
       ]"
-            class="pt-14 min-h-screen w-screen transition-position lg:w-auto bg-gray-50 dark:bg-slate-800 dark:text-slate-100"
+            class="pt-14 min-h-screen w-screen  text-gray-800 transition-position lg:w-auto bg-gray-100 dark:bg-slate-800 dark:text-slate-100"
         >
             <NavBar
                 :menu="navMenu"
@@ -187,4 +187,5 @@ onMounted(() => {
             </FooterBar>
         </div>
     </div>
+
 </template>
