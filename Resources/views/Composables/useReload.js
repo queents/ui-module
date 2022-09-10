@@ -22,7 +22,12 @@ export function useReload() {
 
         if (submitedFilter) {
             Object.keys(submitedFilter).map((key) => {
-                url[key] = submitedFilter[key].map((item) => item.id);
+                if(Array.isArray(submitedFilter[key])){
+                    url[key] = submitedFilter[key].map((item) => item.id);
+                }
+                else {
+                    url[key] = submitedFilter[key];
+                }
             });
         }
 

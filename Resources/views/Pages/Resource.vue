@@ -172,13 +172,22 @@ function getSendedFilter() {
         JSON.stringify(filtersObj.value[filterObj.value.name])
     )[filterObj.value.name];
 
-    const ids = requestedFilter.map((item) => item.id);
+    let ids = "";
+    if(Array.isArray(requestedFilter)){
+        ids = requestedFilter.map((item) => item.id);
+    }
+    else {
+        ids = requestedFilter;
+    }
+
     const sendedFilter = {};
     sendedFilter[filterObj.value.name] = ids;
     return sendedFilter;
 }
 function resetFilter(){
-    reload(1);
+    Inertia.get(route(props.list.url + '.index'), {}, {
+        preserveScroll: true,
+    })
 }
 
 function searchFilter(search){
@@ -224,17 +233,31 @@ function popUp(images){
 }
 
 function createItem(){
-    edit.value = false
-    form.value = useForm(formMake);
-    createModal.value = !createModal.value;
+    if(props.render.form.name === 'page'){
+        Inertia.get(route(props.list.url + '.create'), {}, {
+            preserveScroll: true,
+        })
+    }
+    else {
+        edit.value = false
+        form.value = useForm(formMake);
+        createModal.value = !createModal.value;
+    }
 }
 
 function editItem(item){
-    axios.get(route(props.list.url + '.show', item.id)).then((response) => {
-        form.value = useForm(response.data.data);
-        createModal.value = true;
-        edit.value = true;
-    });
+    if(props.render.form.name === 'page'){
+        Inertia.get(route(props.list.url + '.edit', item.id), {}, {
+            preserveScroll: true,
+        })
+    }
+    else {
+        axios.get(route(props.list.url + '.show', item.id)).then((response) => {
+            form.value = useForm(response.data.data);
+            createModal.value = true;
+            edit.value = true;
+        });
+    }
 };
 
 function viewItem(item){
@@ -584,8 +607,10 @@ watch(
         <br/>
         <br/>
         <CreateModal
+            v-if="props.render.form.name !== 'page'"
             :url="props.list.url"
             :title="edit.value ? rLang.edit_title : rLang.create_title"
+            :errors="props.errors"
             :show="createModal"
             :edit="edit"
             :item="form"

@@ -107,7 +107,7 @@ onMounted(()=>{
                     </span>
 
                     <input
-                        @input="storeSearch"
+                        @change="storeSearch"
                         v-model="search"
                         id="tableSearchQueryInput"
                         placeholder="Search"
