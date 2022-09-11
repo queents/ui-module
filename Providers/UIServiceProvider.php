@@ -29,7 +29,6 @@ class UIServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
         VILT::loadResources($this->moduleName);
-        VILT::loadPages($this->moduleName);
         VILT::registerTranslation(Lang::make('ui.sidebar')->label(__('UI')));
     }
 
