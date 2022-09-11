@@ -247,9 +247,7 @@ function createItem(){
 
 function editItem(item){
     if(props.render.form.name === 'page'){
-        Inertia.get(route(props.list.url + '.edit', item.id), {}, {
-            preserveScroll: true,
-        })
+        Inertia.visit(route(props.list.url + '.edit', item.id))
     }
     else {
         axios.get(route(props.list.url + '.show', item.id)).then((response) => {
@@ -261,10 +259,15 @@ function editItem(item){
 };
 
 function viewItem(item){
-    axios.get(route(props.list.url + '.show', item.id)).then((response) => {
-        form.value = useForm(response.data.data);
-        viewModal.value = true;
-    });
+    if(props.render.form.name === 'page'){
+        Inertia.visit(route(props.list.url + '.view', item.id))
+    }
+    else {
+        axios.get(route(props.list.url + '.show', item.id)).then((response) => {
+            form.value = useForm(response.data.data);
+            viewModal.value = true;
+        });
+    }
 }
 
 function deleteItem(item){

@@ -383,6 +383,7 @@ function updateRecord(id) {
                                 <ViltRich v-if="item.vue === 'ViltRich.vue' && item.edit && item.tab === tab.name && reactiveItem[item.name]" :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
                                 <ViltRelation v-if="item.vue === 'ViltRelation.vue' && item.edit && item.tab === tab.name && reactiveItem[item.name]" :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
                                 <ViltHasOne v-if="item.vue === 'ViltHasOne.vue' && item.edit && item.tab === tab.name && reactiveItem[item.name]" :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+
                             </div>
                             <slot name="edit"></slot>
                         </form>
