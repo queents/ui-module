@@ -46,43 +46,41 @@ export default {
     },
     computed: {
         finalMenu(){
-            {
-                let realMenu = [];
-                let orderingMenu = [];
-                let menu = this.menu;
-                for(let i=0; i<Object.keys(menu).length; i++){
-                    if(Object.keys(menu)[i] === 'main'){
-                        if(menu[Object.keys(menu)[i]].menu.length){
-                            for(let r=0; r<menu[Object.keys(menu)[i]].menu.length; r++){
-                                if(!localStorage.getItem('orderingMenu')) {
-                                    orderingMenu.push(menu[Object.keys(menu)[i]].menu[r].label);
-                                    menu[Object.keys(menu)[i]].menu[r].ordering = i;
-                                }
-                                else {
-                                    menu[Object.keys(menu)[i]].menu[r].ordering = JSON.parse(localStorage.getItem('orderingMenu')).indexOf(menu[Object.keys(menu)[i]].menu[r].label);
-                                }
-                                realMenu.push(menu[Object.keys(menu)[i]].menu[r]);
+            let realMenu = [];
+            let orderingMenu = [];
+            let menu = this.menu;
+            for(let i=0; i<Object.keys(menu).length; i++){
+                if(Object.keys(menu)[i] === 'main'){
+                    if(menu[Object.keys(menu)[i]].menu.length){
+                        for(let r=0; r<menu[Object.keys(menu)[i]].menu.length; r++){
+                            if(!localStorage.getItem('orderingMenu')) {
+                                orderingMenu.push(menu[Object.keys(menu)[i]].menu[r].label);
+                                menu[Object.keys(menu)[i]].menu[r].ordering = i;
                             }
+                            else {
+                                menu[Object.keys(menu)[i]].menu[r].ordering = JSON.parse(localStorage.getItem('orderingMenu')).indexOf(menu[Object.keys(menu)[i]].menu[r].label);
+                            }
+                            realMenu.push(menu[Object.keys(menu)[i]].menu[r]);
                         }
+                    }
+                }
+                else {
+                    if(!localStorage.getItem('orderingMenu')) {
+                        orderingMenu.push(menu[Object.keys(menu)[i]].label);
+                        menu[Object.keys(menu)[i]].ordering = i;
                     }
                     else {
-                        if(!localStorage.getItem('orderingMenu')) {
-                            orderingMenu.push(menu[Object.keys(menu)[i]].label);
-                            menu[Object.keys(menu)[i]].ordering = i;
-                        }
-                        else {
-                            menu[Object.keys(menu)[i]].ordering = JSON.parse(localStorage.getItem('orderingMenu')).indexOf(menu[Object.keys(menu)[i]].label);
-                        }
-
-                        realMenu.push(menu[Object.keys(menu)[i]]);
+                        menu[Object.keys(menu)[i]].ordering = JSON.parse(localStorage.getItem('orderingMenu')).indexOf(menu[Object.keys(menu)[i]].label);
                     }
-                }
 
-                if(!localStorage.getItem('orderingMenu')){
-                    localStorage.setItem('orderingMenu', JSON.stringify(orderingMenu));
+                    realMenu.push(menu[Object.keys(menu)[i]]);
                 }
-                return realMenu.sort((a, b) => a.ordering - b.ordering);
             }
+
+            if(!localStorage.getItem('orderingMenu')){
+                localStorage.setItem('orderingMenu', JSON.stringify(orderingMenu));
+            }
+            return realMenu.sort((a, b) => a.ordering - b.ordering);
         }
     },
     methods: {

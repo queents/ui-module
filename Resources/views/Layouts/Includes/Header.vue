@@ -46,7 +46,7 @@ let emit = defineEmits(['createItem']);
             <a
                 v-if="props.canCreate"
                 @click.prevent="emit('createItem')"
-                class="relative inline-flex items-center px-8 py-3 overflow-hidden text-white bg-main rounded group active:bg-blue-500 focus:outline-none focus:ring"
+                class="relative inline-flex items-center px-8 py-3 overflow-hidden text-white bg-primary-600 rounded group active:bg-blue-500 focus:outline-none focus:ring"
                 href="#"
             >
                 <span

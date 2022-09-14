@@ -462,7 +462,7 @@ watch(
                                     : fireAction(action.action)
                                 : openUrl(action.url)
                         "
-                    class="relative inline-flex items-center px-8 py-3 overflow-hidden text-white bg-main rounded group active:bg-blue-500 focus:outline-none focus:ring"
+                    class="relative inline-flex items-center px-8 py-3 overflow-hidden text-white bg-primary-600 rounded group active:bg-blue-500 focus:outline-none focus:ring"
                 >
                         <span
                             class="absolute left-0 transition-transform -translate-x-full group-hover:translate-x-4"

@@ -1,0 +1,90 @@
+<script setup>
+import {ref} from "vue";
+import Container from '@@/Components/Container.vue';
+import Header from '@@/Components/Header.vue';
+import {Inertia} from '@inertiajs/inertia';
+import {buildViewRows} from '@@/Composables/buildViewRows.js';
+import ViltText from '$$/ViltText.vue'
+import ViltTel from '$$/ViltTel.vue'
+import ViltTextArea from "$$/ViltTextArea.vue";
+import ViltNumber from "$$/ViltNumber.vue";
+import ViltSelect from "$$/ViltSelect.vue";
+import ViltSwitch from "$$/ViltSwitch.vue";
+import ViltColor from "$$/ViltColor.vue";
+import ViltEmail from "$$/ViltEmail.vue";
+import ViltDate from "$$/ViltDate.vue";
+import ViltDateTime from "$$/ViltDateTime.vue";
+import ViltTime from "$$/ViltTime.vue";
+import ViltMedia from "$$/ViltMedia.vue";
+import ViltRepeater from "$$/ViltRepeater.vue";
+import ViltSchema from "$$/ViltSchema.vue";
+import ViltRich from "$$/ViltRich.vue";
+import ViltRelation from "$$/ViltRelation.vue";
+import ViltHasOne from "$$/ViltHasOne.vue";
+
+let viewRows = buildViewRows();
+
+const props = defineProps({
+    rows: Object,
+    errors: Object,
+    record: Object,
+    data: Object,
+    url: String,
+})
+
+let item = ref(props.record);
+
+function edit(){
+    Inertia.visit(route(props.url+'.edit', props.record.id));
+}
+function back(){
+    Inertia.visit(route(props.url+'.index'));
+}
+</script>
+<template>
+    <Container>
+        <template #header>
+            <Header :title="'View {{ titleLabel }} #'+ props.record.id " parent="{{ actionLabel }}" parentUrl="{{ tableName }}.index"/>
+        </template>
+        <template #body>
+            <div class="border bg-white rounded-lg py-2 px-4">
+                <div
+                    v-for="(row, key) in viewRows"
+                    :key="key"
+                    class=""
+                >
+                    <ViltText v-if="row.vue === 'ViltText.vue' " :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltEmail v-if="row.vue === 'ViltEmail.vue' " :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltTel v-if="row.vue === 'ViltTel.vue' " :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltTextArea v-if="row.vue === 'ViltTextArea.vue' " :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltNumber v-if="row.vue === 'ViltNumber.vue' " :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltSelect v-if="row.vue === 'ViltSelect.vue' " :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltSwitch v-if="row.vue === 'ViltSwitch.vue' " :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltColor v-if="row.vue === 'ViltColor.vue' " :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltDate v-if="row.vue === 'ViltDate.vue'"  :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltDateTime v-if="row.vue === 'ViltDateTime.vue'" :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltTime v-if="row.vue === 'ViltTime.vue'" :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltMedia v-if="row.vue === 'ViltMedia.vue'" @popUp="popUp" :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltRepeater v-if="row.vue === 'ViltRepeater.vue'" :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltSchema v-if="row.vue === 'ViltSchema.vue'" :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltRich v-if="row.vue === 'ViltRich.vue'"  :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltRelation v-if="row.vue === 'ViltRelation.vue'"  :row="row" v-model="item[row.name]" view="view"/>
+                    <ViltHasOne v-if="row.vue === 'ViltHasOne.vue'"  :row="row" v-model="item[row.name]" view="view"/>
+                    <hr v-if="key !== viewRows.length-1 " />
+                </div>
+            </div>
+            <div class="flex justify-start-2 space-x-2 py-4">
+                <button class="btn btn-primary" @click.prevent="edit">Edit</button>
+                <button class="btn btn-primary" @click.prevent="back()">Back</button>
+            </div>
+        </template>
+    </Container>
+</template>
+<script>
+import AppLayout from "@@/Layouts/AppLayout.vue";
+
+export default {
+    layout: AppLayout,
+}
+</script>
+art space-

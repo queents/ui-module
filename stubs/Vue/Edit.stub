@@ -1,0 +1,89 @@
+<script setup>
+import Container from '@@/Components/Container.vue';
+import Header from '@@/Components/Header.vue';
+import {ref} from "vue";
+import {Inertia} from '@inertiajs/inertia';
+import {buildEditForm} from '@@/Composables/buildEditForm.js';
+import {submitForm} from '@@/Composables/submitForm.js';
+import ViltText from '$$/ViltText.vue'
+import ViltTel from '$$/ViltTel.vue'
+import ViltTextArea from "$$/ViltTextArea.vue";
+import ViltNumber from "$$/ViltNumber.vue";
+import ViltSelect from "$$/ViltSelect.vue";
+import ViltSwitch from "$$/ViltSwitch.vue";
+import ViltColor from "$$/ViltColor.vue";
+import ViltEmail from "$$/ViltEmail.vue";
+import ViltDate from "$$/ViltDate.vue";
+import ViltDateTime from "$$/ViltDateTime.vue";
+import ViltTime from "$$/ViltTime.vue";
+import ViltMedia from "$$/ViltMedia.vue";
+import ViltRepeater from "$$/ViltRepeater.vue";
+import ViltSchema from "$$/ViltSchema.vue";
+import ViltRich from "$$/ViltRich.vue";
+import ViltRelation from "$$/ViltRelation.vue";
+import ViltHasOne from "$$/ViltHasOne.vue";
+
+let editRows = buildEditForm();
+
+const props = defineProps({
+    rows: Object,
+    errors: Object,
+    record: Object,
+    data: Object,
+    url: String,
+})
+let form = ref(props.record);
+
+function save(redirect=false){
+    submitForm('.update', form.value, props.record.id, redirect);
+}
+function back(){
+    Inertia.visit(route(props.url+'.index'));
+}
+</script>
+<template>
+    <Container>
+        <template #header>
+            <Header :title="'Edit {{ titleLabel }} #'+ props.record.id " parent="{{ actionLabel }}" parentUrl="{{ tableName }}.index"/>
+        </template>
+        <template #body>
+            <form action="" enctype="multipart/form-data">
+                <div
+                    v-for="(item, key) in editRows"
+                    :key="key"
+                    class=""
+                >
+                    <ViltText v-if="item.vue === 'ViltText.vue'" :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltEmail v-if="item.vue === 'ViltEmail.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltTel v-if="item.vue === 'ViltTel.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltTextArea v-if="item.vue === 'ViltTextArea.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltNumber v-if="item.vue === 'ViltNumber.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltSelect v-if="item.vue === 'ViltSelect.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltSwitch v-if="item.vue === 'ViltSwitch.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltColor v-if="item.vue === 'ViltColor.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltDate v-if="item.vue === 'ViltDate.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltDateTime v-if="item.vue === 'ViltDateTime.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltTime v-if="item.vue === 'ViltTime.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltMedia v-if="item.vue === 'ViltMedia.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltRepeater v-if="item.vue === 'ViltRepeater.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltSchema v-if="item.vue === 'ViltSchema.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltRich v-if="item.vue === 'ViltRich.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltRelation v-if="item.vue === 'ViltRelation.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+                    <ViltHasOne v-if="item.vue === 'ViltHasOne.vue' " :message="props.errors[item.name]" :row="item" v-model="form[item.name]"/>
+
+                </div>
+                <div class="py-2 px-2 flex justify-start space-x-2">
+                    <button class="btn btn-primary" @click.prevent="save(true)">Update</button>
+                    <button class="btn btn-primary" @click.prevent="back()">Back</button>
+                </div>
+            </form>
+        </template>
+    </Container>
+</template>
+<script>
+import AppLayout from "@@/Layouts/AppLayout.vue";
+
+export default {
+    layout: AppLayout,
+}
+</script>
